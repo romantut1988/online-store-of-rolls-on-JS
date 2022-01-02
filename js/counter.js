@@ -29,3 +29,23 @@ window.addEventListener('click', function (event) {
     }
 
 });
+
+window.addEventListener('click', function (event) {
+    if (event.target.hasAttribute('data-cart')) {
+        // Находим карточку с товаром, внутри которой был совершен клик
+         const card = event.target.closest('.card');
+
+         // Собираем данные с этого товара и записываем в единый объект productInfo
+        const productInfo = {
+            id: card.dataset.id,
+            imgSrc: card.querySelector('.product-img').getAttribute('src'),
+            title: card.querySelector('.item-title').innerText,
+            itemsInBox: card.querySelector('[data-items-in-box]').innerText,
+            weight: card.querySelector('.price__currency').innerText,
+            price: card.querySelector('.price__currency').innerText,
+            counter: card.querySelector('[data-counter]').innerText,
+        };
+        console.log(productInfo);
+    }
+
+});
