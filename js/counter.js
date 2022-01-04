@@ -1,3 +1,6 @@
+// Div внутри корзины, в которой мы добовляем товары
+const cartWrapper = document.querySelector('.cart-wrapper');
+
 // Добовляем прослушку на всём окне
 window.addEventListener('click', function (event) {
 
@@ -33,9 +36,9 @@ window.addEventListener('click', function (event) {
 window.addEventListener('click', function (event) {
     if (event.target.hasAttribute('data-cart')) {
         // Находим карточку с товаром, внутри которой был совершен клик
-         const card = event.target.closest('.card');
+        const card = event.target.closest('.card');
 
-         // Собираем данные с этого товара и записываем в единый объект productInfo
+        // Собираем данные с этого товара и записываем в единый объект productInfo
         const productInfo = {
             id: card.dataset.id,
             imgSrc: card.querySelector('.product-img').getAttribute('src'),
@@ -45,7 +48,34 @@ window.addEventListener('click', function (event) {
             price: card.querySelector('.price__currency').innerText,
             counter: card.querySelector('[data-counter]').innerText,
         };
-        console.log(productInfo);
-    }
 
+        // Собранные данные подставим в шаблон для товаров в корзине
+        const cartItemHTML = `<div class="cart-item" data-id="${productInfo.id}">
+                                <div class="cart-item__top">
+                                  <div class="cart-item__img">
+                                    <img src="${productInfo.imgSrc}" alt="${productInfo.title}">
+                                  </div>
+                    
+                                 <div class="cart-item__desc">
+                                      <div class="cart-item__title">${productInfo.title}</div>
+                                      <div class="cart-item__weight">${productInfo.itemsInBox} / ${productInfo.weight}</div>
+                                      
+                                      <div class="cart-item__details">
+                                      <div class="items items--small counter-wrapper">
+                                      <div class="items__control" data-action="minus">-</div>
+                                      <div class="items__current" data-counter="">${productInfo.counter}</div>
+                                      <div class="items__control" data-action="plus">+</div>
+                                 </div>
+                                 
+                                       <div class="price">
+                                       <div class="price__currency">${productInfo.price}</div>
+                                       </div>
+                                 </div>
+                                </div>
+                               </div>
+                              </div>`;
+
+        // Отобразим товар в корзине
+        cartWrapper.insertAdjacentHTML('beforeend', cartItemHTML)
+    }
 });
