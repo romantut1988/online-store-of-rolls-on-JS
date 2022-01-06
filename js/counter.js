@@ -49,6 +49,15 @@ window.addEventListener('click', function (event) {
             counter: card.querySelector('[data-counter]').innerText,
         };
 
+        // Проверять если есть уже такой товар в корзине
+        const itemInCart = cartWrapper.querySelector(`[data-id="${productInfo.id}"]`);
+        if (itemInCart) {
+            const counterElement = itemInCart.querySelector('[data-counter]');
+            counterElement.innerText = parseInt(counterElement.innerText) + parseInt(productInfo.counter);
+        } else {
+            // Если товара нет в корзине то
+
+
         // Собранные данные подставим в шаблон для товаров в корзине
         const cartItemHTML = `<div class="cart-item" data-id="${productInfo.id}">
                                 <div class="cart-item__top">
@@ -76,6 +85,7 @@ window.addEventListener('click', function (event) {
                               </div>`;
 
         // Отобразим товар в корзине
-        cartWrapper.insertAdjacentHTML('beforeend', cartItemHTML)
+        cartWrapper.insertAdjacentHTML('beforeend', cartItemHTML);
+        }
     }
 });
