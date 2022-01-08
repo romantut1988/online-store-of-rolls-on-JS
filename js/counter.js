@@ -23,17 +23,14 @@ window.addEventListener('click', function (event) {
     // Проверяем является ли элемент по которому был совершен клик кнопкой Минус
     if (event.target.dataset.action === 'minus') {
 
-        const counterWrapper = event.target.closest('.counter-wrapper');
-        const counter = counterWrapper.querySelector('[data-counter]');
-
         if (parseInt(counter.innerText) > 1) {
             counter.innerText = --counter.innerText;
-        }
-
-        // Проверка на товар который находится в корзине
-        } else if(event.target.closest('.cart-wrapper') && parseInt(counter.innerText)) {
+        } else if(event.target.closest('.cart-wrapper') && parseInt(counter.innerText) === 1) {
             event.target.closest('.cart-item').remove();
+
+
         }
+    }
 });
 
 window.addEventListener('click', function (event) {
@@ -92,5 +89,9 @@ window.addEventListener('click', function (event) {
         }
         // Сбрасываем счётчик добавленного товара на '1'
         card.querySelector('[data-counter]').innerText = '1';
+
+        // Отображение статуса корзины Пустая / Полная
+        toggleCartStatus();
+
     }
 });
