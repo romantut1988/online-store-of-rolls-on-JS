@@ -28,9 +28,20 @@ window.addEventListener('click', function (event) {
         } else if(event.target.closest('.cart-wrapper') && parseInt(counter.innerText) === 1) {
             event.target.closest('.cart-item').remove();
 
+            // Отображение корзины Пустая/Полная
+            toggleCartStatus();
 
+            // Пересчет общей стоимости товаров в карзине
+            calcCartPrice();
         }
     }
+
+    // Проверяем клик на + или - внутри корзины
+    if (event.target.hasAttribute('data-action') && event.target.closest('.cart-wrapper')) {
+        // Пересчет общей стоимости товаров в корзине
+        calcCartPrice();
+    }
+
 });
 
 window.addEventListener('click', function (event) {
@@ -93,5 +104,7 @@ window.addEventListener('click', function (event) {
         // Отображение статуса корзины Пустая / Полная
         toggleCartStatus();
 
+        // Пересчет общей стоимости товаров в корзине
+        calcCartPrice();
     }
 });
