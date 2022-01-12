@@ -32,14 +32,14 @@ window.addEventListener('click', function (event) {
             toggleCartStatus();
 
             // Пересчет общей стоимости товаров в карзине
-            calcCartPrice();
+            calcCartPriceAndDelivery();
         }
     }
 
     // Проверяем клик на + или - внутри корзины
     if (event.target.hasAttribute('data-action') && event.target.closest('.cart-wrapper')) {
         // Пересчет общей стоимости товаров в корзине
-        calcCartPrice();
+        calcCartPriceAndDelivery();
     }
 
 });
@@ -105,6 +105,6 @@ window.addEventListener('click', function (event) {
         toggleCartStatus();
 
         // Пересчет общей стоимости товаров в корзине
-        calcCartPrice();
+        calcCartPriceAndDelivery();
     }
 });
